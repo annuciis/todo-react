@@ -3,9 +3,12 @@ import TodoItem from './TodoItem';
 
 const TodoList = (props) => {
 
+
     const deleteTodoHandler = id =>{
         props.getTodoId(id);
     }
+
+    
 
     const renderTodoList = props.todos.map(todo => {
         return(

@@ -8,13 +8,13 @@ const TodoItem = (props) => {
     const {id, name} = props.todoprop;
 
     return (
-        <li className="item-box">
+        <li className="item-box" >
             <Row>
                 <Col>
                     <p>{name}</p>
                 </Col>
                 <Col>
-                    <i className="far fa-trash-alt delete" onClick={() => {props.clickHandler(id)}}></i>
+                    <i className="far fa-trash-alt delete"   onClick={() => {props.clickHandler(id)}}></i>
                 </Col>
             </Row>
         </li>
