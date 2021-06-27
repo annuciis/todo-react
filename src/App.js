@@ -15,6 +15,8 @@ function App() {
   const  [todos, addTodos] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  
+  //for modal window
   const [open, setOpen] = useState(false);
   const [currentID, setID] = useState("");
   const [currentTodo, setCurrentTodo] = useState("");
