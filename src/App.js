@@ -4,7 +4,8 @@ import './App.css';
 import {Container, Row, Col} from 'react-bootstrap';
 import AddForm from './components/AddForm';
 import TodoList from './components/TodoList';
-import Search from './components/Search'
+import Search from './components/Search';
+import ModalWindow from './components/ModalWindow'
 
 
 
@@ -14,6 +15,9 @@ function App() {
   const  [todos, addTodos] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [currentID, setID] = useState("");
+  const [currentTodo, setCurrentTodo] = useState("");
 
 
   const addTodoHandler = todo => {
@@ -23,10 +27,34 @@ function App() {
 
 
   const removeTodoHandler = id => {
-    const newTodoList = todos.filter(todo => todo.id !== id )
+    setOpen(!open);
+    setID(id);
 
+    const clickedTodo = todos.filter(todo => todo.id === id )
+ 
+
+    setCurrentTodo(clickedTodo[0].name)
+
+  }
+
+   
+   
+  
+  const confirm = () => {
+
+    const newTodoList = todos.filter(todo => todo.id !== currentID )
     addTodos(newTodoList);
-
+    
+    setOpen(!open);
+  
+  }
+  
+  
+  const cancel = () => {
+      
+    addTodos(todos)
+    setOpen(!open);
+  
   }
 
   useEffect(() => {
@@ -73,6 +101,7 @@ function App() {
         <AddForm addTodoHandler={addTodoHandler}/>
         <TodoList todos={searchTerm.length < 1 ? todos : searchResults} getTodoId={removeTodoHandler} /> 
         <Search style={searchResults.length < 1 || searchTerm === "" ? "" : "filled"} term={searchTerm} searchKeyword={searchHandler}/>
+        <ModalWindow style={open  ? "show" : "hidden"} confirm={confirm} close={cancel} name={currentTodo}  />
       </Col>
     </Row>
   </Container>
